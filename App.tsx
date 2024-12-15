@@ -1,22 +1,21 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {DashWrapper} from 'react-native-dash-wrapper';
+import { DashWrapper } from 'react-native-dash-wrapper';
+import { Text } from 'react-native';
 
-const App = () => {
-  return (
-    <DashWrapper
-      height={150}
-      width={200}
-      borderRadius={15}
-      dashGap={5}
-      dashColor="red"
-      dashWidth={10}
-      dashHeight={2}
-      dashBorderRadius={5}
-      onPress={() => console.log('Clicked')}>
-      <Text>Content inside the dashed wrapper</Text>
-    </DashWrapper>
-  );
-};
+const App = () => (
+  <DashWrapper
+    height={200}
+    width={300}
+    dashGap={10}
+    dashColor="blue"
+    dashWidth={4}
+    dashHeight={20}
+    dashBorderRadius={4}
+    backgroundColor="yellow"
+    onPress={() => alert('Pressed!')}
+  >
+    <Text>Hello, DashWrapper!</Text>
+  </DashWrapper>
+);
 
 export default App;
