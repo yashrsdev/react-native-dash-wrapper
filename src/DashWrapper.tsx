@@ -54,7 +54,7 @@ const DashWrapper: React.FC<DashWrapperProps> = ({
           <View key={index} style={style} />
         ))}
       </View>
-      <View style={styles.content}>{children}</View>
+      <View style={styles.content}>       {children}</View>
     </TouchableOpacity>
   );
 };
