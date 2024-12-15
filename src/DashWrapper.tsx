@@ -15,7 +15,7 @@ interface DashWrapperProps {
   children?: React.ReactNode;
 }
 
-const App: React.FC<DashWrapperProps> = ({
+const DashWrapper: React.FC<DashWrapperProps> = ({
   height,
   width,
   borderRadius = 0,
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default DashWrapper;

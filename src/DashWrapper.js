@@ -1,68 +1,33 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
-import Svg, {Line} from 'react-native-svg';
-const DashWrapper = ({
-  height,
-  width,
-  borderRadius,
-  dashGap,
-  dashColor,
-  dashWidth,
-  dashHeight,
-  dashBorderRadius,
-  onPress,
-  children,
-}) => {
-  const renderDashedBorder = () => {
-    // Create an array of dashed lines based on the width and height, applying gap
-    const dashArray = [];
-    const lineCount = Math.floor(width / (dashWidth + dashGap)); // Number of dashes in horizontal direction
-    for (let i = 0; i < lineCount; i++) {
-      dashArray.push(
-        React.createElement(Line, {
-          key: `line-${i}`,
-          x1: i * (dashWidth + dashGap),
-          y1: 0,
-          x2: i * (dashWidth + dashGap) + dashWidth,
-          y2: 0,
-          stroke: dashColor,
-          strokeWidth: dashHeight,
-          strokeLinecap: 'round', // Optional: makes the dash ends rounded
-        }),
-      );
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+const DashWrapper = ({ height, width, borderRadius = 0, dashGap = 5, dashColor = '#000', dashWidth = 2, dashHeight = 10, dashBorderRadius = 0, backgroundColor = '#fff', onPress, children, }) => {
+    const dashStyles = [];
+    const dashCount = Math.floor(width / (dashWidth + dashGap));
+    for (let i = 0; i < dashCount; i++) {
+        dashStyles.push({
+            width: dashWidth,
+            height: dashHeight,
+            backgroundColor: dashColor,
+            borderRadius: dashBorderRadius,
+            marginRight: dashGap,
+        });
     }
-    return React.createElement(
-      Svg,
-      {
-        height: height,
-        width: width,
-        style: {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          borderRadius,
-        },
-      },
-      dashArray,
-    );
-  };
-  return React.createElement(
-    TouchableOpacity,
-    {onPress: onPress},
-    React.createElement(
-      View,
-      {
-        style: {
-          height,
-          width,
-          borderRadius,
-          position: 'relative',
-          overflow: 'hidden',
-        },
-      },
-      renderDashedBorder(),
-      children,
-    ),
-  );
+    return (React.createElement(TouchableOpacity, { onPress: onPress, style: [styles.wrapper, { height, width, borderRadius, backgroundColor }] },
+        React.createElement(View, { style: styles.dashContainer }, dashStyles.map((style, index) => (React.createElement(React.Fragment, null,
+            React.createElement(View, { key: index, style: style }),
+            React.createElement(View, { style: styles.content }, children)))))));
 };
-export {DashWrapper};
+const styles = StyleSheet.create({
+    wrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    dashContainer: {
+        flexDirection: 'row',
+        position: 'absolute',
+    },
+    content: {
+        zIndex: 1,
+    },
+});
+export default DashWrapper;
