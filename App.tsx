@@ -3,6 +3,9 @@ import { DashWrapper } from 'react-native-dash-wrapper';
 import { Text } from 'react-native';
 
 const App = () => (
+
+console.log("enterin ffhfjg")
+
   <DashWrapper
     height={200}
     width={300}
